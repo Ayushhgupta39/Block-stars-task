@@ -6,11 +6,11 @@ function App() {
   const [marketData, setMarketData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+
   const fetchMarketData = async () => {
     const response = await axios.get("http://localhost:8080/prices");
     setMarketData(response.data);
     console.log(response.data);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -61,12 +61,12 @@ function App() {
                     <td className="px-6 py-4">{millify(data.total_supply)}</td>
                     <td className="px-6 py-4">{millify(data.market_cap)}</td>
                   </tr>
-                ))}
+                ))}               
               </tbody>
             </table>
           </div>
         ) : (
-          <div className="flex justify-center">Loading...</div>
+          "Loading..."
         )}
       </div>
     </>
