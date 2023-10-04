@@ -4,11 +4,13 @@ import millify from "millify";
 
 function App() {
   const [marketData, setMarketData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchMarketData = async () => {
     const response = await axios.get("http://localhost:8080/prices");
     setMarketData(response.data);
     console.log(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function App() {
         Price Data
       </h1>
       <div className="relative overflow-x-auto">
-        {marketData ? (
+        {marketData && !loading ? (
           <div>
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -64,7 +66,7 @@ function App() {
             </table>
           </div>
         ) : (
-          "Loading..."
+          <div className="flex justify-center">Loading...</div>
         )}
       </div>
     </>
